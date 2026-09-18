@@ -1,65 +1,988 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#008f72">
-  <meta name="description" content="NASHO Health Center mobile application">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="/nasho-logo.png">
-  <link rel="apple-touch-icon" href="/nasho-logo.png">
-  <link rel="stylesheet" href="/styles.css">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#087f78">
+
+  <meta
+    name="description"
+    content="NASHO Health Center Mobile App"
+  >
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+  >
+
   <title>NASHO Health Center</title>
+
+  <link
+    rel="manifest"
+    href="/manifest.json"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/nasho-logo.png"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="/nasho-logo.png"
+  >
+
+
+  <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+
+      overflow: hidden;
+    }
+
+
+    body {
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+      background: #f5fbfa;
+
+      color: #173c3a;
+    }
+
+
+    button {
+      font-family: inherit;
+
+      border: none;
+
+      cursor: pointer;
+
+      outline: none;
+    }
+
+
+    /* =====================================================
+       SPLASH SCREEN
+    ===================================================== */
+
+    #splashScreen {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 9999;
+
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          circle at top,
+          #d9f7f2 0%,
+          #f5fbfa 45%,
+          #ffffff 100%
+        );
+
+      opacity: 1;
+
+      transition:
+        opacity 0.25s ease;
+    }
+
+
+    .splashContent {
+
+      width: min(88%, 420px);
+
+      text-align: center;
+    }
+
+
+    .splashLogo {
+
+      width: 125px;
+      height: 125px;
+
+      object-fit: contain;
+
+      display: block;
+
+      margin: 0 auto 22px;
+
+      filter:
+        drop-shadow(
+          0 12px 25px
+          rgba(0, 120, 110, 0.15)
+        );
+    }
+
+
+    .splashTitle {
+
+      font-size: 29px;
+
+      font-weight: 800;
+
+      letter-spacing: -0.7px;
+
+      color: #087f78;
+
+      margin-bottom: 5px;
+    }
+
+
+    .splashSubtitle {
+
+      font-size: 16px;
+
+      font-weight: 600;
+
+      color: #55716f;
+
+      margin-bottom: 28px;
+    }
+
+
+    .welcomeText {
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+      color: #183f3c;
+
+      margin-bottom: 7px;
+    }
+
+
+    .tagline {
+
+      font-size: 13px;
+
+      color: #77908e;
+
+      margin-bottom: 27px;
+    }
+
+
+    /* =====================================================
+       LOADING
+    ===================================================== */
+
+    .loadingContainer {
+
+      width: min(270px, 80%);
+
+      margin: auto;
+    }
+
+
+    .loadingBar {
+
+      width: 100%;
+
+      height: 7px;
+
+      background: #dcecea;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+    }
+
+
+    .loadingProgress {
+
+      width: 0%;
+
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          #087f78,
+          #13a99d
+        );
+
+      border-radius: 20px;
+
+      animation:
+        loadingThreeSeconds
+        3s
+        linear
+        forwards;
+    }
+
+
+    @keyframes loadingThreeSeconds {
+
+      from {
+        width: 0%;
+      }
+
+      to {
+        width: 100%;
+      }
+
+    }
+
+
+    .loadingText {
+
+      margin-top: 9px;
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+      color: #7a9390;
+    }
+
+
+    /* =====================================================
+       MAIN SCREEN
+    ===================================================== */
+
+    #mainScreen {
+
+      width: 100%;
+
+      height: 100%;
+
+      overflow-y: auto;
+
+      padding:
+        max(28px, env(safe-area-inset-top))
+        20px
+        max(30px, env(safe-area-inset-bottom));
+
+      background:
+        linear-gradient(
+          180deg,
+          #f8fdfc 0%,
+          #eef9f7 100%
+        );
+    }
+
+
+    .appContainer {
+
+      width: min(100%, 500px);
+
+      margin: auto;
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .topHeader {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      margin-bottom: 32px;
+    }
+
+
+    .smallLogo {
+
+      width: 48px;
+      height: 48px;
+
+      object-fit: contain;
+
+      border-radius: 13px;
+
+      background: #ffffff;
+
+      padding: 4px;
+
+      box-shadow:
+        0 7px 20px
+        rgba(0, 80, 70, 0.09);
+    }
+
+
+    .headerText h1 {
+
+      font-size: 19px;
+
+      font-weight: 800;
+
+      color: #087f78;
+    }
+
+
+    .headerText p {
+
+      margin-top: 2px;
+
+      font-size: 12px;
+
+      color: #718987;
+    }
+
+
+    /* =====================================================
+       MY APPS
+    ===================================================== */
+
+    .myAppsTitle {
+
+      font-size: 27px;
+
+      font-weight: 850;
+
+      color: #153f3b;
+
+      letter-spacing: -0.8px;
+
+      margin-bottom: 20px;
+    }
+
+
+    /* =====================================================
+       APP CARD
+    ===================================================== */
+
+    .appCard {
+
+      width: 100%;
+
+      min-height: 170px;
+
+      padding: 27px 20px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background:
+        rgba(255, 255, 255, 0.96);
+
+      border:
+        1px solid #e0efed;
+
+      border-radius: 24px;
+
+      box-shadow:
+        0 14px 35px
+        rgba(0, 90, 80, 0.08);
+
+      text-align: center;
+    }
+
+
+    /* =====================================================
+       NASHO ICON
+    ===================================================== */
+
+    .appIconButton {
+
+      width: 105px;
+      height: 105px;
+
+      padding: 0;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background: #ffffff;
+
+      border-radius: 27px;
+
+      box-shadow:
+        0 10px 25px
+        rgba(0, 100, 90, 0.10);
+
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+
+    .appIconButton:hover {
+
+      transform: scale(1.03);
+
+      box-shadow:
+        0 13px 30px
+        rgba(0, 100, 90, 0.14);
+    }
+
+
+    .appIconButton:active {
+
+      transform: scale(0.91);
+
+      box-shadow:
+        0 5px 15px
+        rgba(0, 100, 90, 0.10);
+    }
+
+
+    .appIconButton img {
+
+      width: 88px;
+      height: 88px;
+
+      object-fit: contain;
+
+      display: block;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    .footer {
+
+      text-align: center;
+
+      margin-top: 25px;
+
+      font-size: 11px;
+
+      color: #91a7a4;
+    }
+
+
+    /* =====================================================
+       OPENING SCREEN
+    ===================================================== */
+
+    #opening {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 10000;
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          145deg,
+          #eefbf9,
+          #ffffff
+        );
+    }
+
+
+    #opening.show {
+
+      display: flex;
+    }
+
+
+    .openingContent {
+
+      width: 90%;
+
+      text-align: center;
+    }
+
+
+    .openingLogo {
+
+      width: 105px;
+      height: 105px;
+
+      object-fit: contain;
+
+      margin-bottom: 20px;
+    }
+
+
+    .openingTitle {
+
+      font-size: 21px;
+
+      font-weight: 850;
+
+      color: #087f78;
+
+      margin-bottom: 7px;
+    }
+
+
+    .openingText {
+
+      font-size: 13px;
+
+      color: #718987;
+    }
+
+
+    .openingSpinner {
+
+      width: 28px;
+      height: 28px;
+
+      margin: 22px auto 0;
+
+      border-radius: 50%;
+
+      border:
+        3px solid #d8eeeb;
+
+      border-top-color: #087f78;
+
+      animation:
+        spin 0.8s linear infinite;
+    }
+
+
+    @keyframes spin {
+
+      to {
+        transform: rotate(360deg);
+      }
+
+    }
+
+
+    /* =====================================================
+       SMALL PHONES
+    ===================================================== */
+
+    @media (max-width: 430px) {
+
+      .splashLogo {
+
+        width: 115px;
+        height: 115px;
+      }
+
+
+      .splashTitle {
+
+        font-size: 27px;
+      }
+
+
+      .splashSubtitle {
+
+        font-size: 15px;
+      }
+
+
+      .appCard {
+
+        min-height: 150px;
+
+        padding: 22px;
+      }
+
+
+      .appIconButton {
+
+        width: 95px;
+        height: 95px;
+
+        border-radius: 24px;
+      }
+
+
+      .appIconButton img {
+
+        width: 80px;
+        height: 80px;
+      }
+
+
+      .myAppsTitle {
+
+        font-size: 25px;
+      }
+
+    }
+
+
+    /* =====================================================
+       TABLET / DESKTOP
+    ===================================================== */
+
+    @media (min-width: 700px) {
+
+      #mainScreen {
+
+        padding-top: 45px;
+      }
+
+
+      .appCard {
+
+        min-height: 190px;
+      }
+
+    }
+
+  </style>
+
 </head>
+
+
 <body>
-  <div id="splash" class="splash">
-    <img src="/nasho-logo.png" alt="NASHO Health Center">
-    <h1>NASHO</h1>
-    <h2>Health Center</h2>
-    <p>Healthy People • Strong Community</p>
-    <div class="loader"><span></span></div>
-  </div>
 
-  <div id="app" class="app hidden">
-    <header class="topbar">
-      <button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
-      <div class="brand">
-        <img src="/nasho-logo.png" alt="">
-        <div><strong>NASHO</strong><small>Health Center</small></div>
+
+  <!-- ===================================================
+       SPLASH SCREEN
+  ==================================================== -->
+
+  <section id="splashScreen">
+
+    <div class="splashContent">
+
+      <img
+        src="/nasho-logo.png"
+        class="splashLogo"
+        alt="NASHO Health Center Logo"
+      >
+
+      <div class="splashTitle">
+        NASHO
       </div>
-      <button class="icon-btn" id="notifyBtn" aria-label="Notifications">🔔</button>
-    </header>
 
-    <main id="content"></main>
-
-    <nav class="bottom-nav">
-      <button data-page="home" class="nav-item active"><span>⌂</span><small>Home</small></button>
-      <button data-page="services" class="nav-item"><span>♡</span><small>Services</small></button>
-      <button data-page="appointment" class="nav-item"><span>▣</span><small>Appointment</small></button>
-      <button data-page="discussion" class="nav-item"><span>◌</span><small>Discussion</small></button>
-      <button data-page="account" class="nav-item"><span>♙</span><small>Account</small></button>
-    </nav>
-  </div>
-
-  <div id="drawer" class="drawer-backdrop hidden">
-    <aside class="drawer">
-      <button id="closeDrawer" class="close">×</button>
-      <img src="/nasho-logo.png" class="drawer-logo" alt="NASHO">
-      <h2>NASHO Health Center</h2>
-      <p>Healthy People • Strong Community</p>
-      <div class="drawer-links">
-        <button data-page="home">⌂ Home</button>
-        <button data-page="services">♡ Services</button>
-        <button data-page="appointment">▣ Appointment</button>
-        <button data-page="discussion">◌ Discussion</button>
-        <button data-page="contact">☎ Contact</button>
-        <button data-page="account">♙ My Account</button>
+      <div class="splashSubtitle">
+        Health Center
       </div>
-      <a class="emergency-side" href="tel:+250790261899">🚨 Emergency: +250 790 261 899</a>
-    </aside>
-  </div>
 
-  <div id="toast" class="toast"></div>
-  <script src="/app.js"></script>
+      <div class="welcomeText">
+        Welcome to NASHO Health Center
+      </div>
+
+      <div class="tagline">
+        Healthy People • Strong Community
+      </div>
+
+      <div class="loadingContainer">
+
+        <div class="loadingBar">
+
+          <div class="loadingProgress"></div>
+
+        </div>
+
+        <div class="loadingText">
+          Loading...
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       MAIN SCREEN
+  ==================================================== -->
+
+  <main id="mainScreen">
+
+    <div class="appContainer">
+
+
+      <!-- HEADER -->
+
+      <header class="topHeader">
+
+        <img
+          src="/nasho-logo.png"
+          class="smallLogo"
+          alt="NASHO"
+        >
+
+        <div class="headerText">
+
+          <h1>
+            NASHO Health Center
+          </h1>
+
+          <p>
+            Mobile App
+          </p>
+
+        </div>
+
+      </header>
+
+
+
+      <!-- MY APPS -->
+
+      <h2 class="myAppsTitle">
+        MY APPS
+      </h2>
+
+
+
+      <!-- =================================================
+           ONLY NASHO APP ICON
+      ================================================== -->
+
+      <section class="appCard">
+
+        <button
+          id="nashoIcon"
+          class="appIconButton"
+          type="button"
+          aria-label="Open NASHO Health Center"
+        >
+
+          <img
+            src="/nasho-logo.png"
+            alt="NASHO Health Center"
+          >
+
+        </button>
+
+      </section>
+
+
+
+      <!-- FOOTER -->
+
+      <div class="footer">
+        NASHO Health Center
+      </div>
+
+
+    </div>
+
+  </main>
+
+
+
+  <!-- ===================================================
+       OPENING SCREEN
+  ==================================================== -->
+
+  <section id="opening">
+
+    <div class="openingContent">
+
+      <img
+        src="/nasho-logo.png"
+        class="openingLogo"
+        alt="NASHO Health Center"
+      >
+
+      <div class="openingTitle">
+        Opening NASHO Health Center...
+      </div>
+
+      <div class="openingText">
+        Please wait a moment
+      </div>
+
+      <div class="openingSpinner"></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       JAVASCRIPT
+  ==================================================== -->
+
+  <script>
+
+    /* ===================================================
+       NASHO WEBSITE
+    ==================================================== */
+
+    const NASHO_WEBSITE =
+      "https://nasho-hc-services.vercel.app/";
+
+
+    /* ===================================================
+       ELEMENTS
+    ==================================================== */
+
+    const splashScreen =
+      document.getElementById(
+        "splashScreen"
+      );
+
+    const nashoIcon =
+      document.getElementById(
+        "nashoIcon"
+      );
+
+    const opening =
+      document.getElementById(
+        "opening"
+      );
+
+
+    /* ===================================================
+       EXACT 3 SECOND LOADING
+    ==================================================== */
+
+    setTimeout(function () {
+
+      /*
+        Start hiding the splash
+        exactly after 3000 milliseconds.
+      */
+
+      splashScreen.style.opacity =
+        "0";
+
+
+      /*
+        Remove splash shortly after
+        the opacity transition.
+      */
+
+      setTimeout(function () {
+
+        splashScreen.style.display =
+          "none";
+
+      }, 250);
+
+    }, 3000);
+
+
+
+    /* ===================================================
+       OPEN NASHO WEBSITE
+    ==================================================== */
+
+    function openNashoWebsite() {
+
+      /*
+        Show small opening screen.
+      */
+
+      opening.classList.add(
+        "show"
+      );
+
+
+      /*
+        Open the NASHO website.
+      */
+
+      setTimeout(function () {
+
+        window.location.href =
+          NASHO_WEBSITE;
+
+      }, 300);
+
+    }
+
+
+
+    /* ===================================================
+       LOGO CLICK
+    ==================================================== */
+
+    nashoIcon.addEventListener(
+      "click",
+      openNashoWebsite
+    );
+
+
+
+    /* ===================================================
+       SERVICE WORKER
+    ==================================================== */
+
+    if ("serviceWorker" in navigator) {
+
+      window.addEventListener(
+        "load",
+        function () {
+
+          navigator.serviceWorker
+            .register("/sw.js")
+            .catch(function (error) {
+
+              console.log(
+                "Service Worker error:",
+                error
+              );
+
+            });
+
+        }
+      );
+
+    }
+
+  </script>
+
 </body>
+
 </html>

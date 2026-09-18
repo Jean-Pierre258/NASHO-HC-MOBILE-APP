@@ -1,10 +1,154 @@
-const CACHE="nasho-hc-v1";
-const ASSETS=["/","/index.html","/styles.css","/app.js","/manifest.json","/nasho-logo.png"];
-self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))));
-self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
-self.addEventListener("fetch",e=>{
- if(e.request.method!=="GET") return;
- e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(r=>{
-   const copy=r.clone(); caches.open(CACHE).then(c=>c.put(e.request,copy)); return r;
- }).catch(()=>caches.match("/index.html"))));
-});
+const CACHE_NAME = "nasho-launcher-v5";
+
+
+const APP_FILES = [
+  "/",
+  "/index.html",
+  "/manifest.json",
+  "/nasho-logo.png"
+];
+
+
+
+/* =====================================================
+   INSTALL
+===================================================== */
+
+self.addEventListener(
+  "install",
+  function(event) {
+
+    self.skipWaiting();
+
+    event.waitUntil(
+
+      caches
+        .open(CACHE_NAME)
+        .then(function(cache) {
+
+          return cache.addAll(
+            APP_FILES
+          );
+
+        })
+
+    );
+
+  }
+);
+
+
+
+/* =====================================================
+   ACTIVATE
+===================================================== */
+
+self.addEventListener(
+  "activate",
+  function(event) {
+
+    event.waitUntil(
+
+      caches
+        .keys()
+        .then(function(keys) {
+
+          return Promise.all(
+
+            keys.map(function(key) {
+
+              if (
+                key !== CACHE_NAME
+              ) {
+
+                return caches.delete(
+                  key
+                );
+
+              }
+
+            })
+
+          );
+
+        })
+        .then(function() {
+
+          return self.clients.claim();
+
+        })
+
+    );
+
+  }
+);
+
+
+
+/* =====================================================
+   FETCH
+===================================================== */
+
+self.addEventListener(
+  "fetch",
+  function(event) {
+
+    if (
+      event.request.method !== "GET"
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+      Network first.
+      If internet is available,
+      use the newest Vercel version.
+    */
+
+    event.respondWith(
+
+      fetch(event.request)
+
+        .then(function(response) {
+
+          if (
+            response &&
+            response.status === 200 &&
+            response.type === "basic"
+          ) {
+
+            const copy =
+              response.clone();
+
+            caches
+              .open(CACHE_NAME)
+              .then(function(cache) {
+
+                cache.put(
+                  event.request,
+                  copy
+                );
+
+              });
+
+          }
+
+          return response;
+
+        })
+
+        .catch(function() {
+
+          return caches.match(
+            event.request
+          );
+
+        })
+
+    );
+
+  }
+);

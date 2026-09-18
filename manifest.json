@@ -1,0 +1,14 @@
+{
+  "name": "NASHO Health Center",
+  "short_name": "NASHO HC",
+  "description": "NASHO Health Center mobile application",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#008f72",
+  "theme_color": "#008f72",
+  "orientation": "portrait",
+  "icons": [
+    {"src": "/nasho-logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "/nasho-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

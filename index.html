@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
 
 <meta name="theme-color" content="#087f78">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="NASHO">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes"
+>
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="NASHO"
+>
 
 <title>NASHO Health Center</title>
 
 <link rel="manifest" href="./manifest.json">
-<link rel="icon" href="./nasho-logo.png" type="image/png">
+
+<link
+  rel="icon"
+  href="./nasho-logo.png"
+  type="image/png"
+>
 
 <style>
+
+/* =====================================================
+   GLOBAL
+===================================================== */
 
 *{
   box-sizing:border-box;
@@ -31,8 +53,9 @@ body{
 body{
   background:#f5fbfa;
   color:#123;
-  overflow:hidden;
+  overflow-x:hidden;
 }
+
 
 /* =====================================================
    SPLASH SCREEN
@@ -41,7 +64,7 @@ body{
 #splash{
   position:fixed;
   inset:0;
-  z-index:10;
+  z-index:100;
 
   background:
     linear-gradient(
@@ -163,7 +186,9 @@ body{
 ===================================================== */
 
 main{
-  padding:30px 20px;
+  padding:30px 20px 50px;
+  max-width:1200px;
+  margin:auto;
 }
 
 .myapps{
@@ -171,7 +196,14 @@ main{
   font-weight:800;
 
   margin-bottom:20px;
+
+  color:#123;
 }
+
+
+/* =====================================================
+   APP CONTAINER
+===================================================== */
 
 .card{
   background:white;
@@ -179,8 +211,6 @@ main{
   border:1px solid #e5eeee;
 
   border-radius:24px;
-
-  min-height:180px;
 
   padding:28px;
 
@@ -190,19 +220,56 @@ main{
 
 
 /* =====================================================
-   NASHO HC APP ICON
+   APPS GRID
+===================================================== */
+
+.apps-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3, minmax(140px, 1fr));
+
+  gap:24px;
+
+  align-items:start;
+
+}
+
+
+/* =====================================================
+   APP ITEM
+===================================================== */
+
+.app-item{
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  text-decoration:none;
+
+  color:inherit;
+
+  min-width:0;
+}
+
+
+/* =====================================================
+   APP ICON
 ===================================================== */
 
 .icon{
 
-  width:125px;
-  height:145px;
+  width:150px;
+  height:170px;
 
   border:0;
 
-  border-radius:26px;
+  border-radius:28px;
 
-  padding:12px;
+  padding:14px;
 
   background:
     linear-gradient(
@@ -224,56 +291,23 @@ main{
 
   justify-content:center;
 
-  gap:7px;
+  gap:9px;
 
   transition:
     transform .18s ease,
     box-shadow .18s ease;
+
+  text-decoration:none;
 }
 
+.icon:hover{
 
-/* Emoji */
+  transform:translateY(-6px);
 
-.hospital-emoji{
-
-  font-size:78px;
-
-  line-height:1;
-
-  display:block;
-
-  /* teal/green effect */
-  filter:
-    drop-shadow(0 5px 8px #087f7840);
-
-  transform:
-    scale(1.08);
+  box-shadow:
+    0 16px 30px #087f7845;
 
 }
-
-
-/* NASHO HC text */
-
-.hospital-name{
-
-  font-size:16px;
-
-  line-height:1;
-
-  font-weight:900;
-
-  color:#087f78;
-
-  letter-spacing:1px;
-
-  text-align:center;
-
-  margin-top:3px;
-
-}
-
-
-/* click effect */
 
 .icon:active{
 
@@ -281,6 +315,72 @@ main{
 
   box-shadow:
     0 5px 14px #087f7830;
+
+}
+
+
+/* =====================================================
+   APP EMOJIS
+===================================================== */
+
+.app-emoji{
+
+  font-size:72px;
+
+  line-height:1;
+
+  display:block;
+
+  filter:
+    drop-shadow(
+      0 5px 8px #087f7840
+    );
+
+  transform:scale(1.05);
+
+}
+
+
+/* =====================================================
+   APP NAME
+===================================================== */
+
+.app-name{
+
+  font-size:15px;
+
+  line-height:1.15;
+
+  font-weight:900;
+
+  color:#087f78;
+
+  letter-spacing:.5px;
+
+  text-align:center;
+
+  margin-top:4px;
+
+}
+
+
+/* =====================================================
+   APP DESCRIPTION
+===================================================== */
+
+.app-description{
+
+  margin-top:9px;
+
+  font-size:12px;
+
+  color:#718080;
+
+  text-align:center;
+
+  line-height:1.4;
+
+  max-width:170px;
 
 }
 
@@ -295,7 +395,7 @@ main{
 
   inset:0;
 
-  z-index:20;
+  z-index:200;
 
   background:#f5fbfa;
 
@@ -310,17 +410,183 @@ main{
   display:flex;
 }
 
-.openlogo{
+.open-content{
 
-  width:92px;
-  height:92px;
+  text-align:center;
 
-  border-radius:24px;
+  animation:
+    openAnimation .35s ease;
+}
 
-  object-fit:cover;
+.open-icon{
+
+  font-size:75px;
+
+  line-height:1;
+
+  margin-bottom:14px;
+}
+
+.open-title{
+
+  font-size:20px;
+
+  font-weight:900;
+
+  color:#087f78;
+}
+
+.open-subtitle{
+
+  margin-top:7px;
+
+  font-size:13px;
+
+  color:#718080;
+}
+
+@keyframes openAnimation{
+
+  from{
+    opacity:0;
+    transform:scale(.85);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+  main{
+    padding:25px 15px 40px;
+  }
+
+  .myapps{
+    font-size:23px;
+    margin-bottom:17px;
+  }
+
+  .card{
+    padding:20px 14px;
+    border-radius:22px;
+  }
+
+  .apps-grid{
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap:18px 12px;
+
+  }
+
+  .icon{
+
+    width:135px;
+
+    max-width:100%;
+
+    height:155px;
+
+    border-radius:25px;
+
+  }
+
+  .app-emoji{
+
+    font-size:62px;
+
+  }
+
+  .app-name{
+
+    font-size:14px;
+
+  }
+
+  .app-description{
+
+    font-size:11px;
+
+  }
+
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media(max-width:390px){
+
+  .apps-grid{
+
+    gap:15px 8px;
+
+  }
+
+  .icon{
+
+    width:125px;
+
+    height:145px;
+
+  }
+
+  .app-emoji{
+
+    font-size:55px;
+
+  }
+
+  .app-name{
+
+    font-size:13px;
+
+  }
+
+}
+
+
+/* =====================================================
+   LARGE DESKTOP
+===================================================== */
+
+@media(min-width:1000px){
+
+  .icon{
+
+    width:175px;
+
+    height:190px;
+
+  }
+
+  .app-emoji{
+
+    font-size:80px;
+
+  }
+
+  .app-name{
+
+    font-size:16px;
+
+  }
+
 }
 
 </style>
+
 </head>
 
 
@@ -337,7 +603,7 @@ main{
 
     <img
       class="slogo"
-      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABOYAAATmCAYAAACF/K4qAABVdWNhQlgAAFV1anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAVU9qdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjEzYzdlNDc3LWRiOGItNGVmNC05NTQxLWQ3NWE5ZTNiMjdiOQAAAAx4anVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAJ0Wp1bWIAAAA7anVtZEDLDDK7ikidpwsq1vR/Q2kTYzJwYS5pY29uAAAAABhjMnNoAfjmb0W9rD+v1iXFkbkRxwAAABdiZmRiAGltYWdlL3N2Zyt4bWwAAAAJd2JpZGI8c3ZnIHdpZHRoPSI3MTYiIGhlaWdodD0iNzE2IiB2aWV3Qm94PSIwIDAgNzE2IDcxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUwOC43NDkgMzE3LjM5OUM1MTYuNzc3IDI4Ny4zMTQgNTA4Ljk5MSAyNTMuODg0IDQ4NS4zODkgMjMwLjI4MkM0NjEuNzg4IDIwNi42ODEgNDI4LjM2IDE5OC44OTUgMzk4LjI3MyAyMDYuOTIzQzM3Ni4yMzEgMTg0LjkyOCAzNDMuMzkgMTc0Ljk1NiAzMTEuMTQ4IDE4My41OTZDMjc4LjkwNiAxOTIuMjM0IDI1NS40NSAyMTcuMjkyIDI0Ny4zNiAyNDcuMzYxQzIxNy4yOTEgMjU1LjQ1MSAxOTIuMjMzIDI3OC45MSAxODMuNTk1IDMxMS4xNDlDMTc0Ljk1NyAzNDMuMzkxIDE4NC45MjcgMzc2LjIzMiAyMDYuOTI0IDM5OC4yNzRDMTk4Ljg5NiA0MjguMzU5IDIwNi42ODMgNDYxLjc4OSAyMzAuMjg0IDQ4NS4zOTFDMjUzLjg4NSA1MDguOTkyIDI4Ny4zMTMgNTE2Ljc3OSAzMTcuNDAxIDUwOC43NUMzMzkuNDQyIDUzMC43NDUgMzcyLjI4NiA1NDAuNzE3IDQwNC41MjUgNTMyLjA3OUM0MzYuNzY3IDUyMy40NDEgNDYwLjIyMyA0OTguMzg0IDQ2OC4zMTMgNDY4LjMxNUM0OTguMzgzIDQ2MC4yMjQgNTIzLjQ0IDQzNi43NjYgNTMyLjA3OCA0MDQuNTI2QzU0MC43MTYgMzcyLjI4NSA1MzAuNzQ3IDMzOS40NDMgNTA4Ljc0OSAzMTcuNDAyVjMxNy4zOTlaTTQ3MC44OTkgMjQ0Ljc3NkM0ODYuODkyIDI2MC43NyA0OTMuNDg4IDI4Mi42MDEgNDkwLjY4NyAzMDMuNDEyTDQxNS41NzcgMjYwLjA0NkM0MTIuNDExIDI1OC4yMTggNDA4LjUwOSAyNTguMjE4IDQwNS4zNDUgMjYwLjA0NkwzMTcuNDAxIDMxMC44MlYyNzcuNTI2QzMxNy40MDEgMjc1LjE5MSAzMTguNjUyIDI3My4wMDUgMzIwLjY3NiAyNzEuODM3TDM4Ny42NDQgMjMzLjE3NEM0MTQuMTc4IDIxOC4zNTMgNDQ4LjM0NiAyMjIuMjIzIDQ3MC45MDEgMjQ0Ljc3Nkg0NzAuODk5Wk0zNTcuODM3IDMxMS4xNDRMMzk4LjI3NSAzMzQuNDkxVjM4MS4xODVMMzU3LjgzNyA0MDQuNTMyTDMxNy4zOTggMzgxLjE4NVYzMzQuNDkxTDM1Ny44MzcgMzExLjE0NFpNMjY0Ljc3NiAyNjkuNjkzQzI2NS4yMDcgMjM5LjMwNSAyODUuNjQ0IDIxMS42NDkgMzE2LjQ1MyAyMDMuMzkzQzMzOC4zIDE5Ny41NCAzNjAuNTA1IDIwMi43NDQgMzc3LjEyNyAyMTUuNTczTDMwMi4wMTQgMjU4LjkzN0MyOTguODQ4IDI2MC43NjQgMjk2Ljg5OCAyNjQuMTQ0IDI5Ni44OTggMjY3Ljc5OFYzNjkuMzQ2TDI2OC4wNjUgMzUyLjY5OUMyNjYuMDQzIDM1MS41MzEgMjY0Ljc3NiAzNDkuMzUzIDI2NC43NzYgMzQ3LjAxN1YyNjkuNjkxVjI2OS42OTNaTTIwMy4zOTEgMzE2LjQ1NEMyMDkuMjQ0IDI5NC42MDggMjI0Ljg1NCAyNzcuOTc4IDI0NC4yNzYgMjY5Ljk5OVYzNTYuNzNDMjQ0LjI3NiAzNjAuMzg0IDI0Ni4yMjYgMzYzLjc2MyAyNDkuMzkyIDM2NS41OTFMMzM3LjMzNyA0MTYuMzY1TDMwOC41MDMgNDMzLjAxM0MzMDYuNDgxIDQzNC4xODEgMzAzLjk2MSA0MzQuMTg4IDMwMS45MzkgNDMzLjAyTDIzNC45NzEgMzk0LjM1N0MyMDguODY4IDM3OC43ODkgMTk1LjEzOCAzNDcuMjYxIDIwMy4zOTEgMzE2LjQ1NFpNMjQ0Ljc3NSA0NzAuOUMyMjguNzgxIDQ1NC45MDYgMjIyLjE4NiA0MzMuMDc1IDIyNC45ODYgNDEyLjI2NEwzMDAuMDk2IDQ1NS42M0MzMDMuMjYzIDQ1Ny40NTcgMzA3LjE2NCA0NTcuNDU3IDMxMC4zMjggNDU1LjYzTDM5OC4yNzMgNDA0Ljg1NlY0MzguMTQ5QzM5OC4yNzMgNDQwLjQ4NSAzOTcuMDIyIDQ0Mi42NzEgMzk0Ljk5NyA0NDMuODM5TDMyOC4wMjkgNDgyLjUwMkMzMDEuNDk1IDQ5Ny4zMjIgMjY3LjMyNyA0OTMuNDUyIDI0NC43NzIgNDcwLjlIMjQ0Ljc3NVpNNDUwLjg5NyA0NDUuOTgyQzQ1MC40NjYgNDc2LjM3MSA0MzAuMDI5IDUwNC4wMjcgMzk5LjIyIDUxMi4yODNDMzc3LjM3MyA1MTguMTM2IDM1NS4xNjggNTEyLjkzMiAzMzguNTQ3IDUwMC4xMDJMNDEzLjY1OSA0NTYuNzM4QzQxNi44MjYgNDU0LjkxMSA0MTguNzc1IDQ1MS41MzIgNDE4Ljc3NSA0NDcuODc3VjM0Ni4zMjlMNDQ3LjYwOSAzNjIuOTc3QzQ0OS42MzEgMzY0LjE0NSA0NTAuODk3IDM2Ni4zMjMgNDUwLjg5NyAzNjguNjU5VjQ0NS45ODVWNDQ1Ljk4MlpNNTEyLjI4MiAzOTkuMjIxQzUwNi40MjkgNDIxLjA2OCA0OTAuODE5IDQzNy42OTcgNDcxLjM5NyA0NDUuNjc2VjM1OC45NDZDNDcxLjM5NyAzNTUuMjkyIDQ2OS40NDggMzUxLjkxMiA0NjYuMjgxIDM1MC4wODVMMzc4LjMzNiAyOTkuMzExTDQwNy4xNyAyODIuNjYzQzQwOS4xOTIgMjgxLjQ5NSA0MTEuNzEyIDI4MS40ODcgNDEzLjczNCAyODIuNjU1TDQ4MC43MDIgMzIxLjMxOEM1MDYuODA1IDMzNi44ODcgNTIwLjUzNiAzNjguNDE1IDUxMi4yODIgMzk5LjIyMVoiIGZpbGw9ImJsYWNrIi8+Cjwvc3ZnPgoAAAGzanVtYgAAAEFqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmFjdGlvbnMudjIAAAAAGGMyc2gC1yLdjy0u/y1c3M89AEerAAABamNib3KiZ2FjdGlvbnODpGZhY3Rpb25sYzJwYS5jcmVhdGVkZHdoZW7AeB4yMDI2LTA5LTE4VDE3OjQyOjExLjU4MjE0NDM3Nlptc29mdHdhcmVBZ2VudKJkbmFtZWlncHQtaW1hZ2VndmVyc2lvbmMyLjBxZGlnaXRhbFNvdXJjZVR5cGV4Rmh0dHA6Ly9jdi5pcHRjLm9yZy9uZXdzY29kZXMvZGlnaXRhbHNvdXJjZXR5cGUvdHJhaW5lZEFsZ29yaXRobWljTWVkaWGiZmFjdGlvbm5jMnBhLmNvbnZlcnRlZGR3aGVuwHgeMjAyNi0wOS0xOFQxNzo0MjoxMS41ODIxNDc3NjFaomZhY3Rpb254GGMycGEud2F0ZXJtYXJrZWQudW5ib3VuZGR3aGVuwHgeMjAyNi0wOS0xOFQxNzo0MjoxMS41ODA0NTIzODRacmFsbEFjdGlvbnNJbmNsdWRlZPQAAADDanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaEuZiVrMaZ8lg5FsxVw2+mgAAAB7Y2JvcqVqZXhjbHVzaW9uc4GiZXN0YXJ0GCFmbGVuZ3RoGVWBZG5hbWVuanVtYmYgbWFuaWZlc3RjYWxnZnNoYTI1NgAARc5qdW1iAAAAKGp1bWRjMmNzABEAEIAAAKoAOJtxA2MycGEuc2lnbmF0dXJlAAAARZ5jYm9y0oRZB1WiASYYIYJZA3IwggNuMIIC86ADAgECAhRSlCUHgbVqhvkzF3hw1o6t72IaQTAKBggqhkjOPQQDAzCBpzELMAkGA1UEBhMCVVMxETAPBgNVBAgMCE5ldyBZb3JrMREwDwYDVQQHDAhOZXcgWW9yazETMBEGA1UECgwKVHJ1Zm8gSW5jLjEUMBIGA1UECwwLQ0EgRGl2aXNpb24xGjAYBgkqhkiG9w0BCQEWC2NhQHRydWZvLmFpMSswKQYDVQQDDCJUcnVmbyBDMlBBIENsYWltIFNpZ25pbmcgQ0EgKDIwMjUpMB4XDTI2MDMyMzAyNTMwMloXDTI3MDMyNDAyNTMwMlowRzELMAkGA1UEBhMCVVMxGTAXBgNVBAoMEE9wZW5BSSBPcENvLCBMTEMxHTAbBgNVBAMMFE9wZW5BSSBNZWRpYSBTZXJ2aWNlMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESqpE4gX/lrlPP8VsGeRutoYh53nozkzdKRVw+xuJZ8KNdAGRc/Mm9S9+4LWgcZYRYzNOJ1ZhjWl8ijimS/0qb6OCAVowggFWMB8GA1UdIwQYMBaAFMOzJJY0k6FZ6lIYa54X4Km61rBMMB0GA1UdDgQWBBQKd12L3lQTzn/zDzdxWsmHk1kx2DAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB/wQEAwIGwDAfBgNVHSUEGDAWBgorBgEEAYPoXgIBBggrBgEFBQcDJDAlBgNVHSAEHjAcMAwGCisGAQQBg+heAQEwDAYKKwYBBAGD6DwBATBeBggrBgEFBQcBAQRSMFAwIQYIKwYBBQUHAQEEUjBQMCEGCCqGSM49AgEGCCqGSM49AwEHA3pAMGYCMQD/5oFiNWv70TfsT9gQvQqMqQ+mBNdWbS3qZxvVvolX750qrwd9eyqWWlGaoojvpc8CMQCtgDZrZ+hERAeVrM0BhL3tW8vdHVmLeIcDzg5lKxX7dJ+7xR2q0PF+uOzAiEt2FThZA9cwggPTMIIDWKADAgECAhQw6KHwpYlCa9K5gkhHmRncFjcCyzAKBggqhkjOPQQDAzCBqDELMAkGA1UEBhMCVVMxETAPBgNVBAgMCE5ldyBZb3JrMREwDwYDVQQHDAhOZXcgWW9yazETMBEGA1UECgwKVHJ1Zm8gSW5jLjEUMBIGA1UECwwLQ0EgRGl2aXNpb24xGjAYBgkqhkiG9w0BCQEWC2NhQHRydWZvLmFpMSwwKgYDVQQDDCNUcnVmbyBDMlBBIFJvb3QgQ0EgKDIwMjUsIEVDQyBQMzg0KTAeFw0yNjAyMDEwOTE1MThaFw0zMTAyMDIwOTE1MThaMIGnMQswCQYDVQQGEwJVUzERMA8GA1UECAwITmV3IFlvcmsxETAPBgNVBAcMCE5ldyBZb3JrMRMwEQYDVQQKDApUcnVmbyBJbmMuMRQwEgYDVQQLDAtDQSBEaXZpc2lvbjEaMBgGCSqGSIb3DQEJARYLY2FAdHJ1Zm8uYWkxKzApBgNVBAMMIlRydWZvIEMyUEEgQ2xhaW0gQ0EgKDIwMjUpMB4XDTI2MDgwOTAwNDYxNVoXDTI2MTEwNzAwNDYxNVowgZ4xCzAJBgNVBAYTAlVTMREwDwYDVQQIDAhOZXcgWW9yazERMA8GA1UEBwwITmV3IFlvcmsxEzARBgNVBAoMClRydWZvIEluYy4xFDASBgNVBAsMC0NBIERpdmlzaW9uMRowGAYJKoZIhvcNAQkBFgtjYUB0cnVmby5haTEiMCAGA1UEAwwZVHJ1Zm8gQzJQQSBPQ1NQIFJlc3BvbmRlcjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABLTGs9QYzFsgMiJPasPT9psY7uiYoMu89tZYl2fRbUzAacjIcORfBn+stCtzVIOZDUrSDRLp0v851wxcBrZ0szCjgYcwgYQwHQYDVR0OBBYEFN1n7FV516M0dO95KLeXB3mKRkP1MB8GA1UdIwQYMBaAFMOzJJY0k6FZ6lIYa54X4Km61rBMMAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgeAMBMGA1UdJQQMMAoGCCqGSM49AgEGCCqGSM49AwMDaQAwZgIxAMo/wIBDwP4ExNwIskxS2xp9oDcgXXkl1E+tOqSHYXPamAMdJFaIJ2Jz28uOaRAv1gIxAJFN0sqmdx35ZUhm87th34VtmJbYWljnrndBE/h1dEfwsuaItO4/USDPfZoi8BzyYGNcWADK7ikidpwsq1vR/Q2kTYzJwYS5pY29uAAAAABhjMnNoAfjmb0W9rD+v1iXFkbkRxwAAABdiZmRiAGltYWdlL3N2Zyt4bWwAAAAJd2JpZGI8c3ZnIHdpZHRoPSI3MTYiIGhlaWdodD0iNzE2IiB2aWV3Qm94PSIwIDAgNzE2IDcxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUwOC43NDkgMzE3LjM5OUM1MTYuNzc3IDI4Ny4zMTQgNTA4Ljk5MSAyNTMuODg0IDQ4NS4zODkgMjMwLjI4MkM0NjEuNzg4IDIwNi42ODEgNDI4LjM2IDE5OC44OTUgMzk4LjI3MyAyMDYuOTIzQzM3Ni4yMzEgMTg0LjkyOCAzNDMuMzkgMTc0Ljk1NiAzMTEuMTQ4IDE4My41OTZDMjc4LjkwNiAxOTIuMjM0IDI1NS40NSAyMTcuMjkyIDI0Ny4zNiAyNDcuMzYxQzIxNy4yOTEgMjU1LjQ1MSAxOTIuMjMzIDI3OC45MSAxODMuNTk1IDMxMS4xNDlDMTc0Ljk1NyAzNDMuMzkxIDE4NC45MjcgMzc2LjIzMiAyMDYuOTI0IDM5OC4yNzRDMTk4Ljg5NiA0MjguMzU5IDIwNi42ODMgNDYxLjc4OSAyMzAuMjg0IDQ4NS4zOTFDMjUzLjg4NSA1MDguOTkyIDI4Ny4zMTMgNTE2Ljc3OSAzMTcuNDAxIDUwOC43NUMzMzkuNDQyIDUzMC43NDUgMzcyLjI4NiA1NDAuNzE3IDQwNC41MjUgNTMyLjA3OUM0MzYuNzY3IDUyMy40NDEgNDYwLjIyMyA0OTguMzg0IDQ2OC4zMTMgNDY4LjMxNUM0OTguMzgzIDQ2MC4yMjQgNTIzLjQ0IDQzNi43NjYgNTMyLjA3OCA0MDQuNTI2QzU0MC43MTYgMzcyLjI4NSA1MzAuNzQ3IDMzOS40NDMgNTA4Ljc0OSAzMTcuNDAyVjMxNy4zOTlaTTQ3MC44OTkgMjQ0Ljc3NkM0ODYuODkyIDI2MC43NyA0OTMuNDg4IDI4Mi42MDEgNDkwLjY4NyAzMDMuNDEyTDQxNS41NzcgMjYwLjA0NkM0MTIuNDExIDI1OC4yMTggNDA4LjUwOSAyNTguMjE4IDQwNS4zNDUgMjYwLjA0NkwzMTcuNDAxIDMxMC44MlYyNzcuNTI2QzMxNy40MDEgMjc1LjE5MSAzMTguNjUyIDI3My4wMDUgMzIwLjY3NiAyNzEuODM3TDM4Ny42NDQgMjMzLjE3NEM0MTQuMTc4IDIxOC4zNTMgNDQ4LjM0NiAyMjIuMjIzIDQ3MC45MDEgMjQ0Ljc3Nkg0NzAuODk5Wk0zNTcuODM3IDMxMS4xNDRMMzk4LjI3NSAzMzQuNDkxVjM4MS4xODVMMzU3LjgzNyA0MDQuNTMyTDMxNy4zOTggMzgxLjE4NVYzMzQuNDkxTDM1Ny44MzcgMzExLjE0NFpNMjY0Ljc3NiAyNjkuNjkzQzI2NS4yMDcgMjM5LjMwNSAyODUuNjQ0IDIxMS42NDkgMzE2LjQ1MyAyMDMuMzkzQzMzOC4zIDE5Ny41NCAzNjAuNTA1IDIwMi43NDQgMzc3LjEyNyAyMTUuNTczTDMwMi4wMTQgMjU4LjkzN0MyOTguODQ4IDI2MC43NjQgMjk2Ljg5OCAyNjQuMTQ0IDI5Ni44OTggMjY3Ljc5OFYzNjkuMzQ2TDI2OC4wNjUgMzUyLjY5OUMyNjYuMDQzIDM1MS41MzEgMjY0Ljc3NiAzNDkuMzUzIDI2NC43NzYgMzQ3LjAxN1YyNjkuNjkxVjI2OS42OTNaTTIwMy4zOTEgMzE2LjQ1NEMyMDkuMjQ0IDI5NC42MDggMjI0Ljg1NCAyNzcuOTc4IDI0NC4yNzYgMjY5Ljk5OVYzNTYuNzNDMjQ0LjI3NiAzNjAuMzg0IDI0Ni4yMjYgMzYzLjc2MyAyNDkuMzkyIDM2NS41OTFMMzM3LjMzNyA0MTYuMzY1TDMwOC41MDMgNDMzLjAxM0MzMDYuNDgxIDQzNC4xODEgMzAzLjk2MSA0MzQuMTg4IDMwMS45MzkgNDMzLjAyTDIzNC45NzEgMzk0LjM1N0MyMDguODY4IDM3OC43ODkgMTk1LjEzOCAzNDcuMjYxIDIwMy4zOTEgMzE2LjQ1NFpNMjQ0Ljc3NSA0NzAuOUMyMjguNzgxIDQ1NC45MDYgMjIyLjE4NiA0MzMuMDc1IDIyNC45ODYgNDEyLjI2NEwzMDAuMDk2IDQ1NS42M0MzMDMuMjYzIDQ1Ny40NTcgMzA3LjE2NCA0NTcuNDU3IDMxMC4zMjggNDU1LjYzTDM5OC4yNzMgNDA0Ljg1NlY0MzguMTQ5QzM5OC4yNzMgNDQwLjQ4NSAzOTcuMDIyIDQ0Mi42NzEgMzk0Ljk5NyA0NDMuODM5TDMyOC4wMjkgNDgyLjUwMkMzMDEuNDk1IDQ5Ny4zMjIgMjY3LjMyNyA0OTMuNDUyIDI0NC43NzIgNDcwLjlIMjQ0Ljc3NVpNNDUwLjg5NyA0NDUuOTgyQzQ1MC40NjYgNDc2LjM3MSA0MzAuMDI5IDUwNC4wMjcgMzk5LjIyIDUxMi4yODNDMzc3LjM3MyA1MTguMTM2IDM1NS4xNjggNTEyLjkzMiAzMzguNTQ3IDUwMC4xMDJMNDEzLjY1OSA0NTYuNzM4QzQxNi44MjYgNDU0LjkxMSA0MTguNzc1IDQ1MS41MzIgNDE4Ljc3NSA0NDcuODc3VjM0Ni4zMjlMNDQ3LjYwOSAzNjIuOTc3QzQ0OS42MzEgMzY0LjE0NSA0NTAuODk3IDM2Ni4zMjMgNDUwLjg5NyAzNjguNjU5VjQ0NS45ODVWNDQ1Ljk4MlpNNTEyLjI4MiAzOTkuMjIxQzUwNi40MjkgNDIxLjA2OCA0OTAuODE5IDQzNy42OTcgNDcxLjM5NyA0NDUuNjc2VjM1OC45NDZDNDcxLjM5NyAzNTUuMjkyIDQ2OS40NDggMzUxLjkxMiA0NjYuMjgxIDM1MC4wODVMMzc4LjMzNiAyOTkuMzExTDQwNy4xNyAyODIuNjYzQzQwOS4xOTIgMjgxLjQ5NSA0MTEuNzEyIDI4MS40ODcgNDEzLjczNCAyODIuNjU1TDQ4MC43MDIgMzIxLjMxOEM1MDYuODA1IDMzNi44ODcgNTIwLjUzNiAzNjguNDE1IDUxMi4yODIgMzk5LjIyMVoiIGZpbGw9ImJsYWNrIi8+Cjwvc3ZnPgoAAAGzanVtYgAAAEFqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmFjdGlvbnMudjIAAAAAGGMyc2gC1yLdjy0u/y1c3M89AEerAAABamNib3KiZ2FjdGlvbnODpGZhY3Rpb25sYzJwYS5jcmVhdGVkZHdoZW7AeB4yMDI2LTA5LTE4VDE3OjQyOjExLjU4MjE0NDM3Nlptc29mdHdhcmVBZ2VudKJkbmFtZWlncHQtaW1hZ2VndmVyc2lvbmMyLjBxZGlnaXRhbFNvdXJjZVR5cGV4Rmh0dHA6Ly9jdi5pcHRjLm9yZy9uZXdzY29kZXMvZGlnaXRhbHNvdXJjZXR5cGUvdHJhaW5lZEFsZ29yaXRobWljTWVkaWGiZmFjdGlvbm5jMnBhLmNvbnZlcnRlZGR3aGVuwHgeMjAyNi0wOS0xOFQxNzo0MjoxMS41ODIxNDc3NjFaomZhY3Rpb254GGMycGEud2F0ZXJtYXJrZWQudW5ib3VuZGVkZHdI…"
+      src="./nasho-logo.png"
       alt="NASHO"
     >
 
@@ -366,11 +632,12 @@ main{
 
   <img
     class="hlogo"
-  
+    src="./nasho-logo.png"
     alt="NASHO"
   >
 
   <div>
+
     <div class="htitle">
       NASHO Health Center
     </div>
@@ -378,6 +645,7 @@ main{
     <div class="hsub">
       Mobile App
     </div>
+
   </div>
 
 </header>
@@ -393,24 +661,97 @@ main{
     MY APPS
   </div>
 
+
   <section class="card">
 
-    <button
-      id="nashoIcon"
-      class="icon"
-      type="button"
-      aria-label="Open NASHO Health Center"
-    >
+    <div class="apps-grid">
 
-      <span class="hospital-emoji">
-        🏥
-      </span>
 
-      <span class="hospital-name">
-        NASHO HC
-      </span>
+      <!-- =================================================
+           NASHO HC
+      ================================================== -->
 
-    </button>
+      <a
+        class="app-item"
+        href="https://nasho-hc-services.vercel.app/"
+      >
+
+        <div class="icon">
+
+          <span class="app-emoji">
+            🏥
+          </span>
+
+          <span class="app-name">
+            NASHO HC
+          </span>
+
+        </div>
+
+        <div class="app-description">
+          NASHO Health Center Services
+        </div>
+
+      </a>
+
+
+      <!-- =================================================
+           BIRTH CERTIFICATE
+      ================================================== -->
+
+      <a
+        class="app-item"
+        href="https://birth-certificate-nasho-hc.vercel.app/"
+      >
+
+        <div class="icon">
+
+          <span class="app-emoji">
+            📜
+          </span>
+
+          <span class="app-name">
+            BIRTH CERTIFICATE
+          </span>
+
+        </div>
+
+        <div class="app-description">
+          Medical Birth Certificate
+        </div>
+
+      </a>
+
+
+      <!-- =================================================
+           ADMIN CRVS
+      ================================================== -->
+
+      <a
+        class="app-item"
+        href="https://birth-certificate-nasho-hc.vercel.app/admin.html"
+      >
+
+        <div class="icon">
+
+          <span class="app-emoji">
+            🛡️
+          </span>
+
+          <span class="app-name">
+            ADMIN CRVS
+          </span>
+
+        </div>
+
+        <div class="app-description">
+          CRVS Administration
+        </div>
+
+      </a>
+
+
+    </div>
 
   </section>
 
@@ -418,32 +759,29 @@ main{
 
 
 <!-- =====================================================
-     OPENING
+     OPENING SCREEN
 ===================================================== -->
 
 <div id="opening">
 
-  <div>
+  <div class="open-content">
 
     <div
-      style="
-        font-size:70px;
-        text-align:center;
-        margin-bottom:12px;
-      "
+      id="openIcon"
+      class="open-icon"
     >
       🏥
     </div>
 
     <div
-      style="
-        font-size:18px;
-        font-weight:800;
-        color:#087f78;
-        text-align:center;
-      "
+      id="openTitle"
+      class="open-title"
     >
       NASHO HC
+    </div>
+
+    <div class="open-subtitle">
+      Opening application...
     </div>
 
   </div>
@@ -456,6 +794,7 @@ main{
 ===================================================== -->
 
 <script>
+
 
 /* =====================================================
    SPLASH SCREEN
@@ -474,29 +813,50 @@ setTimeout(function(){
 
 
 /* =====================================================
-   NASHO HC BUTTON
+   APP OPENING ANIMATION
 ===================================================== */
 
-document.getElementById("nashoIcon").onclick=function(){
-
-  const opening =
-    document.getElementById("opening");
-
-  opening.classList.add("show");
+const appLinks =
+  document.querySelectorAll(".app-item");
 
 
-  /* small opening animation */
+appLinks.forEach(function(app){
 
-  setTimeout(function(){
+  app.addEventListener("click",function(e){
 
-    location.href =
-      "https://nasho-hc-services.vercel.app/";
+    /*
+      Allow normal browser navigation.
+      We only show a very short opening animation.
+    */
 
-  },250);
+    const opening =
+      document.getElementById("opening");
 
-};
+    const icon =
+      this.querySelector(".app-emoji");
+
+    const name =
+      this.querySelector(".app-name");
+
+    if(icon){
+      document.getElementById("openIcon").textContent =
+        icon.textContent.trim();
+    }
+
+    if(name){
+      document.getElementById("openTitle").textContent =
+        name.textContent.trim();
+    }
+
+    opening.classList.add("show");
+
+  });
+
+});
+
 
 </script>
+
 
 </body>
 </html>
